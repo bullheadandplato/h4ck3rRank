@@ -1,6 +1,11 @@
 package com.bullhead.rank.algos.freq;
 
+import java.io.*;
 import java.util.*;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toList;
 
 public class Solution {
 
@@ -21,24 +26,23 @@ public class Solution {
         HashMap<Integer, Integer> opResult = new HashMap<>();
         StringBuilder             answer   = new StringBuilder();
         for (Query query : queries) {
-            int count = opResult.getOrDefault(query.value, 0);
             switch (query.operation) {
                 case 1:
+                    int count = opResult.getOrDefault(query.value, 0);
                     opResult.put(query.value, ++count);
                     break;
                 case 2:
-                    if (count > 0) {
-                        opResult.put(query.value, --count);
+                    int count1 = opResult.getOrDefault(query.value, 0);
+                    if (count1 > 0) {
+                        opResult.put(query.value, --count1);
                     }
                     break;
                 case 3:
                     answer.append(opResult.containsValue(query.value) ? 1 : 0);
                     answer.append("\n");
                     break;
-
             }
         }
-        answer.deleteCharAt(answer.length() - 1);
         System.out.println(answer);
     }
 
