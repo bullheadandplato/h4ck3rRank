@@ -18,14 +18,18 @@ public class Solution {
             int y = scan.nextInt();
             li.add(new Query(x, y));
         }
-        countFrequency(li);
+        countFrequency(li.subList(0, Math.min(li.size(), 100000)));
 
     }
 
     public static void countFrequency(List<Query> queries) {
         HashMap<Integer, Integer> opResult = new HashMap<>();
         StringBuilder             answer   = new StringBuilder();
+
         for (Query query : queries) {
+            if (query.value < 1) {
+                continue;
+            }
             switch (query.operation) {
                 case 1:
                     int count = opResult.getOrDefault(query.value, 0);
@@ -38,7 +42,7 @@ public class Solution {
                     }
                     break;
                 case 3:
-                    answer.append(opResult.containsValue(query.value) ? 1 : 0);
+                    answer.append(query.value < 100001 && opResult.containsValue(query.value) ? 1 : 0);
                     answer.append("\n");
                     break;
             }
