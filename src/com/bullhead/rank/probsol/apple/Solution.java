@@ -5,8 +5,23 @@ import java.util.Scanner;
 public class Solution {
 
     static void countApplesAndOranges(int s, int t, int a, int b, int[] apples, int[] oranges) {
+        int appleFalls = 0;
+        int orangeFalls = 0;
+        for (int apple : apples) {
+            int cal = apple + a;
+            if (cal >= s && cal <= t) {
+                appleFalls++;
+            }
+        }
 
-
+        for (int orange : oranges) {
+            int cal = orange + b;
+            if (cal >= s && cal <= t) {
+                orangeFalls++;
+            }
+        }
+        System.out.println(appleFalls);
+        System.out.println(orangeFalls);
     }
 
     private static final Scanner scanner = new Scanner(System.in);
